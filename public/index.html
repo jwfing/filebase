@@ -32,11 +32,24 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed page-footer-fixed page-sidebar-fixed">
+            
     <!-- BEGIN CONTAINER -->
     <div class="page-container row-fluid">
+        <div class="page-sidebar nav-collapse collapse">
+            <!-- BEGIN SIDEBAR MENU -->
+            <ul id="page-sidebar-menu" class="page-sidebar-menu">
+                <li>
+                    <a href="#"><span>最近上传文件</span></a>
+                </li>
+            </ul>
+            <!-- END SIDEBAR MENU -->
+        </div>
+        <!-- END SIDEBAR -->
+
         <!-- BEGIN PAGE -->
         <div class="page-content">
             <!-- BEGIN PAGE CONTAINER-->
+
             <div class="container-fluid">
                 <!-- BEGIN PAGE CONTENT-->
                 <div class="row-fluid">
@@ -152,7 +165,20 @@
 			FormComponents.init();
 
 	        AV.initialize("lhzo7z96ayhad9flpynyiu79t2jpzuasz2ke8cdb09zduvug", "0k0wpd4ee07yoi9ecrltd2lqjjna6njnkp7u0mfhd8e1ft3h");
-            
+            var query = new AV.Query("_File");
+            query.descending("createdAt");
+            query.limit(20);
+            query.find({
+                success: function(results) {
+                    for (var i = 0; i < results.length; i++) {
+                        var fileObject = results[i];
+                        $("#page-sidebar-menu").append($("<li><a target='blank' href='" + fileObject.get('url') + "'><span>" + fileObject.get('name') + "</span></a></li>"));
+                    }
+                },
+                error: function(error) {
+                    alert("Error: " + error.code + " " + error.message);
+                }
+            });
 		});
 		
 		function clock(){
