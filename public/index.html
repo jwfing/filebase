@@ -25,8 +25,6 @@
     <link rel="stylesheet" type="text/css" href="assets/plugins/select2/select2_metro.css" />
     <link rel="stylesheet" type="text/css" href="assets/plugins/chosen-bootstrap/chosen/chosen.css" />
     <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.css" />
-    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-daterangepicker/daterangepicker.css" />
-    <link href="assets/plugins/bootstrap-switch/static/stylesheets/bootstrap-switch-metro.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL STYLES -->
 </head>
 <!-- END HEAD -->
@@ -132,13 +130,11 @@
     <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
     <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
     <!--[if lt IE 9]>
 	<script src="assets/plugins/excanvas.min.js"></script>
 	<script src="assets/plugins/respond.min.js"></script>  
 	<![endif]-->
     <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
     <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
     <!-- END CORE PLUGINS -->
@@ -146,11 +142,7 @@
     <script type="text/javascript" src="assets/plugins/jquery-validation/dist/jquery.validate.min.js"></script>
     <script type="text/javascript" src="assets/plugins/jquery-validation/dist/additional-methods.min.js"></script>
     <script type="text/javascript" src="assets/plugins/select2/select2.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
     <script type="text/javascript" src="assets/plugins/bootstrap-fileupload/bootstrap-fileupload.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap-daterangepicker/date.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="assets/plugins/bootstrap-switch/static/js/bootstrap-switch.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL PLUGINS -->
     <script src="assets/scripts/app.js"></script>
     <script src="assets/scripts/form-validation/video.js"></script>
@@ -172,7 +164,7 @@
                 success: function(results) {
                     for (var i = 0; i < results.length; i++) {
                         var fileObject = results[i];
-                        $("#page-sidebar-menu").append($("<li><a target='blank' href='" + fileObject.get('url') + "'><span>" + fileObject.get('name') + "</span></a></li>"));
+                        $("#page-sidebar-menu").append($("<li><a target='blank' href='" + fileObject.get('url').replace("http://ac-lhzo7z96.clouddn.com/","https://dn-lhzo7z96.qbox.me/") + "'><span>" + fileObject.get('name') + "</span></a></li>"));
                     }
                 },
                 error: function(error) {
@@ -243,7 +235,7 @@
 					var fileBucket = new qiniu.bucket(bucket, {putToken: upToken});
 					fileBucket.putFile(currentTS, fBinFile).then(function(reply){
                         clearInterval(interval);
-						$("#upimage").html("Successed, fileUrl = " + finalUrl);
+						$("#upimage").html("Successed, fileUrl = " + finalUrl.replace("http://ac-lhzo7z96.clouddn.com/","https://dn-lhzo7z96.qbox.me/"));
 					},function(err){
 						clearInterval(interval);
 						console.log("upload failed. error:" + err);
